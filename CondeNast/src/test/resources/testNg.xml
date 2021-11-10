@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Testing Wired App">
+<suite name="Testing Wired App" parallel="classes">
 
     <test name="Regression">
         <classes>
             <class name="BaseTest"/>
 
         </classes>
-   </test> <!-- Test -->
+    </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -1,8 +1,10 @@
+import com.wired.commons.DriverClass;
 import com.wired.pages.HomePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,11 +16,12 @@ import static java.util.concurrent.TimeUnit.*;
 
 public class BaseTest {
 
-    private AppiumDriver driver;
-    private HomePage homePage;
+    //private AppiumDriver driver;
+    protected HomePage homePage ;
+
 
     @BeforeClass
-    public void beforeClass() throws MalformedURLException {
+    public void BeforeClass() throws MalformedURLException {
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -31,16 +34,18 @@ public class BaseTest {
 
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
 
-        driver = new AndroidDriver(url, desiredCapabilities);
-        driver.manage().timeouts().implicitlyWait(10, SECONDS);
-        homePage = new HomePage(driver);
+        //driver = new AndroidDriver(url, desiredCapabilities);
+        DriverClass.setDriver(new AndroidDriver(url, desiredCapabilities));
+
+       // driver.manage().timeouts().implicitlyWait(10, SECONDS);
+
     }
 
-    @Test
-    public void testLaunch(){
 
-        homePage.clickHamburgerMenu();
+    @AfterClass
+    public void AfterClass(){
 
+        DriverClass.getDriver().quit();
     }
 
 }
